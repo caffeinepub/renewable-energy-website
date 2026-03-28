@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.625rem;
+    /* Dark theme colors in OKLCH L C H */
+    --background: 0.1 0.008 240;
+    --foreground: 0.95 0.01 240;
+    --card: 0.14 0.012 240;
+    --card-foreground: 0.95 0.01 240;
+    --popover: 0.12 0.01 240;
+    --popover-foreground: 0.95 0.01 240;
+    /* Neon green primary */
+    --primary: 0.82 0.22 145;
+    --primary-foreground: 0.1 0.008 240;
+    /* Cyan secondary */
+    --secondary: 0.7 0.18 210;
+    --secondary-foreground: 0.95 0.01 240;
+    --muted: 0.18 0.01 240;
+    --muted-foreground: 0.6 0.02 240;
+    /* Solar yellow accent */
+    --accent: 0.85 0.18 85;
+    --accent-foreground: 0.1 0.008 240;
+    --destructive: 0.6 0.22 25;
+    --destructive-foreground: 0.95 0.01 0;
+    --border: 0.25 0.02 240;
+    --input: 0.2 0.015 240;
+    --ring: 0.82 0.22 145;
+    --chart-1: 0.82 0.22 145;
+    --chart-2: 0.7 0.18 210;
+    --chart-3: 0.85 0.18 85;
+    --chart-4: 0.6 0.22 25;
+    --chart-5: 0.7 0.15 300;
+    --sidebar: 0.12 0.01 240;
+    --sidebar-foreground: 0.95 0.01 240;
+    --sidebar-primary: 0.82 0.22 145;
+    --sidebar-primary-foreground: 0.1 0.008 240;
+    --sidebar-accent: 0.18 0.01 240;
+    --sidebar-accent-foreground: 0.95 0.01 240;
+    --sidebar-border: 0.25 0.02 240;
+    --sidebar-ring: 0.82 0.22 145;
+
+    /* Custom neon color vars */
+    --neon-green: #7cff4d;
+    --neon-green-dim: #00ff8888;
+    --neon-cyan: #23c8ff;
+    --neon-cyan-dim: #0088ff66;
+    --solar-yellow: #ffd24a;
+    --glass-bg: rgba(14, 22, 30, 0.65);
+    --glass-border: rgba(124, 255, 77, 0.18);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", sans-serif;
+    background: linear-gradient(135deg, #0a0f14 0%, #0b1218 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-md;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+  }
+
+  .neon-text {
+    color: var(--neon-green);
+    text-shadow: 0 0 20px rgba(124, 255, 77, 0.6), 0 0 40px
+      rgba(124, 255, 77, 0.3);
+  }
+
+  .neon-cyan {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 20px rgba(35, 200, 255, 0.6), 0 0 40px
+      rgba(35, 200, 255, 0.3);
+  }
+
+  .neon-yellow {
+    color: var(--solar-yellow);
+    text-shadow: 0 0 20px rgba(255, 210, 74, 0.6);
+  }
+
+  .neon-border {
+    border: 1px solid var(--neon-green);
+    box-shadow: 0 0 10px rgba(124, 255, 77, 0.3), inset 0 0 10px
+      rgba(124, 255, 77, 0.05);
+  }
+
+  .neon-glow-hover:hover {
+    border-color: var(--neon-green) !important;
+    box-shadow: 0 0 20px rgba(124, 255, 77, 0.4), 0 0 40px
+      rgba(124, 255, 77, 0.15);
+    transform: translateY(-4px);
+    transition: all 0.3s ease;
+  }
+
+  .card-3d-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .card-3d-hover:hover {
+    transform: rotateY(5deg) rotateX(-2deg) translateY(-6px) scale(1.02);
+    box-shadow: -10px 10px 30px rgba(124, 255, 77, 0.2);
+  }
+
+  .section-reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .section-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .energy-pulse {
+    animation: pulse-ring 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(124, 255, 77, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(124, 255, 77, 0);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes flow-right {
+    0% {
+      stroke-dashoffset: 100;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes energy-flow {
+    0% {
+      stroke-dashoffset: 200;
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes neon-flicker {
+    0%,
+    95%,
+    100% {
+      opacity: 1;
+    }
+    96% {
+      opacity: 0.85;
+    }
+    97% {
+      opacity: 1;
+    }
+    98% {
+      opacity: 0.9;
+    }
+    99% {
+      opacity: 1;
+    }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+  .animate-neon-flicker {
+    animation: neon-flicker 5s ease-in-out infinite;
+  }
+}
